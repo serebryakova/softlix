@@ -3,8 +3,10 @@ import MetaHead from "@/meta/MetaHead";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import * as Api from "@/api";
-import { count } from "console";
+
 import AnalyticRating from "@/components/ui/AnalyticRating";
+import { HashLoader } from "react-spinners";
+
 
 interface MovieDetails {
 	movie: MovieItem;
@@ -45,6 +47,15 @@ const MoviePage = () => {
 						setMovieReleaseDate(formattedDate);
 					}
        },[movie, movieReleaseDate])
+
+	   if(!movie?.movie || !movieId) {
+		return (
+			<div className="flex w-full h-[100vh] items-center justify-center">
+				<HashLoader color={'red'} />
+
+			</div>
+		);
+	   }
 
 	return (
 		<>
